@@ -45,8 +45,8 @@ const BookShow = () => {
             Screen this side, you will be watching in this direction
           </p>
           <div className="screen-div"></div>
-        </div>
-        <ul className="seat-ul justify-content-center">
+          <br />
+          <ul className="seat-ul justify-content-center">
           {Array.from(Array(rows).keys()).map((row) => {
             return Array.from(Array(columns).keys()).map((column) => {
               let seatNumber = row * columns + column + 1;
@@ -87,14 +87,14 @@ const BookShow = () => {
                   <li>
                     <button
                       onClick={() => {
-                        if (selectedSeats.includes(seatNumber)) {
-                          setSelectedSeats(
-                            selectedSeats.filter(
-                              (curSeatNumber) => curSeatNumber !== seatNumber
-                            )
-                          );
-                        } else {
-                          setSelectedSeats([...selectedSeats, seatNumber]);
+                        if(!show.bookedSeats.includes(seatNumber)){
+                          if (selectedSeats.includes(seatNumber)) {
+                            setSelectedSeats(
+                              selectedSeats.filter((seat) => seat !== seatNumber)
+                            );
+                          } else {
+                            setSelectedSeats([...selectedSeats, seatNumber]);
+                          }
                         }
                       }}
                       className={seatClass}
@@ -107,6 +107,8 @@ const BookShow = () => {
           })}
         </ul>
 
+        </div>
+        
         <div className="d-flex bottom-card justify-content-between w-100 max-width-600 mx-auto mb-25px mt-3">
           <div className="flex-1">
             Selected Seats: <span>{selectedSeats.join(", ")}</span>
